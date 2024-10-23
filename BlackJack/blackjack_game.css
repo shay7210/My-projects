@@ -1,0 +1,210 @@
+/* Ensure the content fits the entire viewport */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: green;
+    overflow: hidden; /* Prevents overflow issues */
+}
+
+/* Main container to organize everything */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100vw;
+    max-height: 150vh;
+}
+
+/* Dealer Container */
+#dealer-container {
+    display: flex;
+    flex-direction: column; /* Stack title and score vertically */
+    align-items: center; /* Center the items */
+    margin-bottom: 100px;
+    width: 100%;
+}
+
+/* Dealer Title and Score */
+#d-title {
+    font-size: 20px;
+    margin-bottom: 10px; /* Add some space below the title */
+    transform:translateX(-50px) ;
+}
+#p-title{
+    font-size: 20px;
+}
+
+#dealer-score {
+    margin-bottom: 10px; /* Space below the dealer score */
+}
+
+/* Dealer Cards - Display in a Row */
+.dealer-cards {
+    display: flex;
+    justify-content: center; /* Center the dealer cards */
+    width: 100%; /* Ensure it fits the container */
+}
+
+/* Player Cards - Display in a Row */
+.player-cards {
+    display: flex;
+    justify-content: center; /* Center the player cards */
+    width: 100%; /* Ensure it fits the container */
+    margin-top: 20px; /* Adjust top margin */
+}
+
+/* Adjust Card Size */
+.d-card, .p-card {
+    height: 120px; /* Card height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    margin: 0 5px; /* Add horizontal spacing between cards */
+}
+
+/* Back button positioning */
+#back-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Middle section styles */
+#middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 5%; /* Move to the middle-left of the screen */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+}
+
+/* Deck card style */
+#upside_down_deck {
+    height: 150px;
+    width: 100px;
+    border: 1px solid white;
+    border-radius: 10px;
+    transform: rotate(90deg);
+    margin-right: 10px;
+}
+
+/* Bet Container and Balance Alignment */
+#bet-container {
+    position: absolute;
+    right: 5%; /* Move to the right side of the screen */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Bet amount input styles */
+#bet-amount {
+    font-size: 20px;
+}
+
+/* Current amount styling */
+#current-amount {
+    position: absolute;
+    right: 11.5%; /* Move to the right side of the screen */
+    top: 68%; /* Adjust position for balance text */
+    font-size: 20px;
+    display: inline-block;
+}
+
+/* Common button styles */
+button {
+    font-size: 18px;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Button hover and active states */
+button:hover {
+    background-color: #fd3d3d;
+}
+
+button:active {
+    background-color: #fd6565;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+}
+
+/* Balance Tracker Container */
+#current-amount {
+    font-size: 24px; /* Font size for better visibility */
+    color: #fff; /* Text color for contrast */
+    background-color: #4CAF50; /* Green background to indicate positive balance */
+    padding: 10px 15px; /* Padding for a better look */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    margin-top: 20px; /* Space above the balance tracker */
+    text-align: center; /* Center the text */
+    display: inline-block; /* Allow margin around it */
+}
+
+/* Specific styles for the balance amount */
+#balance-amount {
+    font-weight: bold; /* Make the balance amount stand out */
+    font-size: 28px; /* Slightly larger font size for emphasis */
+}
+
+/* Optional: Styles for when balance is low */
+.low-balance {
+    background-color: #f44336; /* Red background for low balance warning */
+}
+
+
+/* Result pop up overlay - hidden by default */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Button inside the modal */
+#continueBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#resultText{
+font-size: 20px;
+}
+
+#closeBtn {
+    display: none;
+    cursor: pointer;
+}
