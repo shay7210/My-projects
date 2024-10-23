@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Home</title>
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="blackjack_home.css">
+    <script src="index.js" defer></script> <!-- Use defer to load script after HTML -->
+
+</head>
+<body>
+
+
+    <div class="container">
+      <div> <img class="background_chips_left" src="blackjack_pics/chips.png" alt=""> </div>
+
+
+      <div class="options-selector">
+         <h1 class="title">Blackjack Game</h1>
+        <!-- Deck Selector -->
+        <label for="num-decks">Number of Decks (1-5):</label>
+        <input type="number" id="num-decks" value="1" min="1" max="5">
+        <!-- Game Buttons -->
+        <button type='submit' id="start-btn">Start Game</button>
+      </div>
+    <div><img class="background_chips_right" src="blackjack_pics/chips.png"></div>
+    </div>
+    <!--<img class=background_blackjack src="blackjack_pics/blackjack2.png"> -->
+<p id="test"></p>
+
+</body>
+</html>
