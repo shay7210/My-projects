@@ -1,0 +1,5 @@
+This is my second project, built with React, focused on visualizing data structures to reinforce concepts I recently covered in my data structure course.
+The first part of this project features interactive visualizations of array sorting algorithms,
+including bubble sort, insertion sort, and quicksort, with merge sort currently in progress.
+Each visualization showcases the step-by-step behavior of the algorithms, providing an intuitive, hands-on learning experience.
+This project has been a valuable way to solidify my understanding of sorting algorithms while enhancing my React skills.
