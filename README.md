@@ -1,1 +1,1 @@
-My projects ! i upload my projects to track my improvment as i keep learning and progressing
+Welcome to my project progress tracker! This folder is dedicated to documenting the evolution of my project as I make improvements, experiment with new ideas, and refine my approach. Here, you'll find the different stages of development, each capturing insights and progress milestones. My aim is to build on each iteration, ultimately achieving a robust and polished result. I hope this serves as a helpful glimpse into my development journey!
