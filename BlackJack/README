@@ -1,3 +1,5 @@
-my first javascript web project, created a blackjack game. main features are: *the amount of decks can be chosen *that cards that are drawn from the deck cant be drawn again until shuffle button is pressed
-
-first time expirencing with html and css it was a lot of fun ! hope to make greater, bigger and more complex projects in the future using these tools.
+This is my first project: a fully functional Blackjack game written in JavaScript! 
+It simulates a real deck that updates with each game and includes an automatic shuffle option,
+which activates whenever the deck doesn’t have enough cards for a new round.
+Players can place bets on each turn, adding an extra layer of excitement to the game. If you lose all your money, it’s game over! 
+This project was an exciting way to learn JavaScript, and I’m looking forward to further refining it as I improve my skills.
