@@ -29,10 +29,6 @@ class Player{
     reset_cur_bet(){
       this.cur_bet = 0;
     }
-
-
-
-
 }
 
 class ScoreToken{
