@@ -5,20 +5,21 @@ import Cell from "./cell.jsx";
 function Array(props) {
     const [cells, setCells] = useState([]); //array cells
     const [isCellSelected, setIsCellSelected] = useState(null); // if the cell is selected in popup
-    const [cellYellowMarker, setCellYellowMarker] = useState([]); // collects the indexes of the cells to switch
-    const [isSwitchSelected, setIsSwitchSelected] = useState(null); // if the cell is about to switch
-    const [isBlink, setIsBlink] = useState([]); // state for the blink of the two cells after the switch
     const [valueToAdd, setValueToAdd] = useState(''); // keeps track of the value to add
     const [isPointer, setPointer] = useState([]); // an option to put a pointer above the cell
-    const [marker, setMarker] = useState([]);
-    const [pivots, setPivots] = useState([]); //marks all the pivot for quicksort
-    const [transparency, setTransparency] = useState([]); // for quicksort
-    const [isCellDisabled, setIsCellDisabled] = useState(false);
+    const [isCellDisabled, setIsCellDisabled] = useState(false); //disable all cell buttons
+    //color markers
+    const [cellPurpleMarker, setCellPurpleMarker] = useState([]);
+    const [cellGreenMarker, setCellGreenMarker] = useState([]); //marks all the pivot for quicksort
+    const [cellGreyMarker, setCellGreyMarker] = useState([]);
+    const [cellRedMarker, setCellRedMarker] = useState(null); // if the cell is about to switch
+    const [cellBlinkRedMarker, setCellBlinkRedMarker] = useState([]); // state for the blink of the two cells after the switch
+    const [cellTransparentMarker, setCellTransparentMarker] = useState([]);
+
+    //merge use states
     const [mergeArray, setMergeArray] = useState([]);
     const [isMerge, setIsMerge] = useState(false);
     const [isBlinkMerge, setIsBlinkMerge] = useState([]);
-
-
 
     //buttons
     const addValueButton = document.getElementById('addValueButton');
@@ -64,17 +65,17 @@ function Array(props) {
 
     // Updates the selected cell states
     const handleCellSwitchState = (index) => {
-        const temp = [...cellYellowMarker];
+        const temp = [...cellPurpleMarker];
         temp.push(index);
-        setCellYellowMarker(temp);
+        setCellPurpleMarker(temp);
         if (temp.length === 2) {
             switchCells(temp[0], temp[1]);
-            setCellYellowMarker([]); // Clear the switch state after switching
+            setCellPurpleMarker([]); // Clear the switch state after switching
 
-            setIsSwitchSelected(null); // clears the yellow color
+            setCellRedMarker(null); // clears the yellow color
         }
         else {
-            setIsSwitchSelected(index)   // paints the cell with yellow
+            setCellRedMarker(index)   // paints the cell with yellow
         }
         setIsCellSelected(null);  // clears the popup menu
     };
@@ -86,9 +87,9 @@ function Array(props) {
         temp[index1] = temp[index2];
         temp[index2] = tempValue;
         setCells(temp); // Update the cells state
-        setIsBlink([index1,index2])
+        setCellBlinkRedMarker([index1,index2])
         setTimeout(() =>{  //puts the cells back to default
-            setIsBlink([])
+            setCellBlinkRedMarker([])
         },100)
     };
 
@@ -134,7 +135,7 @@ function Array(props) {
     const clearAll = () =>{
         setCells([])
         setIsCellSelected(null);
-        setIsSwitchSelected(null)
+        setCellRedMarker(null)
     }
 
 // Helper delay function
@@ -153,22 +154,22 @@ function Array(props) {
                     setCells([...updatedCells]); // Update the cell state after swap
 
                     // Apply blinking effect on swapped elements
-                    setIsBlink([...[j, j + 1]]); // Add blink effect
+                    setCellBlinkRedMarker([...[j, j + 1]]); // Add blink effect
                     await delay(300); // Short delay for the blinking effect
-                    setIsBlink([...[]]); // Remove blink effect after delay
+                    setCellBlinkRedMarker([...[]]); // Remove blink effect after delay
                 }
 
 
                 // Wait before moving to the next comparison
                 await delay(600); // Delay between comparisons
             }
-            setMarker(m => [...m, updatedCells.length - 1- i]);
+            setCellGreyMarker(m => [...m, updatedCells.length - 1- i]);
         }
 
         // Clear the pointer after sorting completes
         setPointer([]);
         await delay(500);
-        setMarker([])
+        setCellGreyMarker([])
         enableButtons()
 
     }
@@ -177,8 +178,8 @@ function Array(props) {
         // create copy of cells
         let updatedCells = cells.map(value => parseInt(value, 10));
         disableButtons();
-        //set the first marker
-        setMarker([...[0]]);
+        //set the first cellGreyMarker
+        setCellGreyMarker([...[0]]);
         let markerTest = [0]
         for (let i = 1; i < updatedCells.length; i++) {
             // track the current index
@@ -194,7 +195,7 @@ function Array(props) {
                 markerTest.push(curIndex);
                 markerTest = markerTest.filter((index,_) => index !== j);
                 // Consistently update markers
-                setMarker([...markerTest])
+                setCellGreyMarker([...markerTest])
 
                 curIndex = j;
                 setCells(updatedCells.map(value => String(value)));
@@ -202,11 +203,11 @@ function Array(props) {
             }
             await delay(500);
             markerTest.push(curIndex);
-            setMarker([...markerTest]);
+            setCellGreyMarker([...markerTest]);
         }
         //reset pointer and markers
         setPointer([]);
-        setMarker([]);
+        setCellGreyMarker([]);
         enableButtons();
     }
     //quick sort
@@ -215,7 +216,7 @@ function Array(props) {
         let updatedCells = cells.map(value => parseInt(value, 10));
         // mark the first pivot
         let pivotMarkers = [updatedCells.length-1];
-        setPivots([...pivotMarkers])
+        setCellGreenMarker([...pivotMarkers])
         // create empty arrays for transparent and sorted cells
         let sortedMarkerTest = [];
         let transparencyTest = [];
@@ -231,20 +232,20 @@ function Array(props) {
             // take out the next call stack
             let curIndexes = callStack.pop();
             //update the pivot and pointers
-            setPivots([curIndexes[1]])
+            setCellGreenMarker([curIndexes[1]])
             setPointer([curIndexes[0], curIndexes[1]]);
             //if both sides are equal this call stack is over
             if (curIndexes[0] === curIndexes[1]) {
                 continue;
             }
-            // update transparency list for items that are not used int the current partition
+            // update cellTransparentMarker list for items that are not used int the current partition
             for (let j = 0; j < curIndexes[0]; j++) {
                 transparencyTest.push(j);
             }
             for (let j = curIndexes[1] + 1; j <= updatedCells.length - 1; j++) {
                 transparencyTest.push(j);
             }
-            setTransparency([...transparencyTest]);
+            setCellTransparentMarker([...transparencyTest]);
             // updates markers of sorted cells
             for (let j = 1; j < updatedCells.length - 1; j++) {
                 if (sortedMarkerTest.includes(j-1) && sortedMarkerTest.includes(j + 1)) {
@@ -253,7 +254,7 @@ function Array(props) {
             }
             if (sortedMarkerTest.includes(1)){ sortedMarkerTest.push(0)}
             if (sortedMarkerTest.includes(updatedCells.length - 2)){sortedMarkerTest.push(updatedCells.length - 1)}
-            setMarker([...sortedMarkerTest]);
+            setCellGreyMarker([...sortedMarkerTest]);
 
             await delay(500);
             //preform partition, extract the pivot correct location and the updated array
@@ -269,27 +270,27 @@ function Array(props) {
             if (nextPartitionIndex !== curIndexes[1]) {
                 callStack.push([nextPartitionIndex + 1, curIndexes[1]])
             }
-            // reset transparency list
+            // reset cellTransparentMarker list
             transparencyTest = []
-            setTransparency([...transparencyTest]);
-            //reset pivot marker
+            setCellTransparentMarker([...transparencyTest]);
+            //reset pivot cellGreyMarker
             pivotMarkers = []
-            setPivots([...pivotMarkers]);
+            setCellGreenMarker([...pivotMarkers]);
         }
 
         // end of sorting
-        //reset pivots
-        setPivots([])
+        //reset cellGreenMarker
+        setCellGreenMarker([])
         // mark all as sorted before finishing the function
         sortedMarkerTest = []
         for (let i = 0; i < updatedCells.length; i++) {
             sortedMarkerTest.push(i)
         }
-        setMarker([...sortedMarkerTest]);
+        setCellGreyMarker([...sortedMarkerTest]);
         // reset pointers and sorted markers after a delay
         await delay(500)
         setPointer([])
-        setMarker([])
+        setCellGreyMarker([])
         enableButtons()
 
         // partition function
@@ -315,16 +316,16 @@ function Array(props) {
                     // insert the value at the correct location
                     updatedCells.splice(curIndexPivot,0,temp);
                     //set a blink to indicate that the value was changed
-                    setIsBlink([...[curIndexPivot]])
+                    setCellBlinkRedMarker([...[curIndexPivot]])
                     //update the view on screen
                     setCells([...updatedCells])
                     // update i and the current pivot location to the correct locations
                     curIndexPivot--;
                     i--;
-                    //changes the value of pivot marker
+                    //changes the value of pivot cellGreyMarker
                     pivotMarkers = pivotMarkers.filter(value => value !== curIndexPivot + 1);
                     pivotMarkers.push(curIndexPivot)
-                    setPivots([...pivotMarkers]);
+                    setCellGreenMarker([...pivotMarkers]);
                     // update pointers location in the case of a switch
                     setPointer([...[pointerLeft, pointerRight-1]])
                 }
@@ -332,12 +333,12 @@ function Array(props) {
                 else{setPointer([pointerLeft, pointerRight])}
                 //reset the blink after a delay
                 await delay(500)
-                setIsBlink([])
+                setCellBlinkRedMarker([])
 
             }
-            //update marker for sorted items to the final position of the pivot
+            //update cellGreyMarker for sorted items to the final position of the pivot
             markerTest.push(curIndexPivot);
-            setMarker([...markerTest]);
+            setCellGreyMarker([...markerTest]);
             // return the correct location of the pivot and the updated array
             return [curIndexPivot, updatedCells];
         }
@@ -358,9 +359,9 @@ function Array(props) {
             let showTransparent = [...range(end + 1, updatedCells.length - 1, false), ...range(0, start - 1, false)]
             let showYellow = [...range(mid + 1, end, false)];
             // setters
-            setTransparency([...range(end + 1, updatedCells.length - 1), ...range(0, start - 1)]);
-            setPivots([...range(start, mid, false)]);
-            setCellYellowMarker([...range(mid + 1, end,false)]);
+            setCellTransparentMarker([...range(end + 1, updatedCells.length - 1), ...range(0, start - 1)]);
+            setCellGreenMarker([...range(start, mid, false)]);
+            setCellPurpleMarker([...range(mid + 1, end,false)]);
             await delay(1000)
 
             // Splitting in half case where blocks are bigger than 3
@@ -377,11 +378,11 @@ function Array(props) {
                     resultMerge = await merge([lastSubArray[0][0]], [lastSubArray[0][1]], [start], [end]);
                     updatedCells.splice(start,2,...resultMerge)
                     setCells([...updatedCells])
-                    setPivots([])
-                    setCellYellowMarker([])
-                    setIsBlink(range(start,start + 1))
+                    setCellGreenMarker([])
+                    setCellPurpleMarker([])
+                    setCellBlinkRedMarker(range(start,start + 1))
                     await delay(1000)
-                    setIsBlink([])
+                    setCellBlinkRedMarker([])
                     // block equal to 3
                 } else if (lastSubArray[0].length === 3) {
                     // do merge with two one sized blocks update cells and colors
@@ -389,18 +390,18 @@ function Array(props) {
                     updatedCells.splice(start,2,...resultMerge)
                     setCells([...updatedCells])
                     //visual affects
-                    setPivots([])
-                    setCellYellowMarker([])
-                    setIsBlink(range(start,start + 1))
+                    setCellGreenMarker([])
+                    setCellPurpleMarker([])
+                    setCellBlinkRedMarker(range(start,start + 1))
                     await delay(1000)
-                    setIsBlink([])
+                    setCellBlinkRedMarker([])
                     // merge a second time with two sized block and a one sized block, update cells and colors
                     resultMerge = await merge(resultMerge, [lastSubArray[0][2]], [start, mid], [end]);
                     updatedCells.splice(start,3,...resultMerge)
                     setCells([...updatedCells])
-                    setIsBlink(range(start,start + 2))
+                    setCellBlinkRedMarker(range(start,start + 2))
                     await delay(1000)
-                    setIsBlink([])
+                    setCellBlinkRedMarker([])
                 }
                 helperStack.push([resultMerge, [start,end]]);
             }
@@ -422,11 +423,11 @@ function Array(props) {
                         updatedCells.splice(current[1], merged.length, ...merged);  // Insert merged array in place
                         setCells([...updatedCells])
                         //visual effects
-                        setPivots([])
-                        setCellYellowMarker([])
-                        setIsBlink(range(current[1][0],next[1][1]))
+                        setCellGreenMarker([])
+                        setCellPurpleMarker([])
+                        setCellBlinkRedMarker(range(current[1][0],next[1][1]))
                         await delay(1000)
-                        setIsBlink([])
+                        setCellBlinkRedMarker([])
                         // Update helperStack with the merged result
                         helperStack[l] = [merged, [current[1][0],next[1][1]]];
 
@@ -436,12 +437,12 @@ function Array(props) {
                 }
             }
             // Clear visualization after each iteration
-            setCellYellowMarker([]);
-            setPivots([]);
+            setCellPurpleMarker([]);
+            setCellGreenMarker([]);
             await delay(1000);  // Delay for visualization
         }
 
-        setTransparency([]);
+        setCellTransparentMarker([]);
         enableButtons();
 
     async function merge(array1, array2, array1IndexesList, array2IndexesList) {
@@ -454,9 +455,9 @@ function Array(props) {
             let testTranceparcy = [...range(0,array1IndexesList[0],false),
             ...range(array2IndexesList[array2IndexesList.length-1] + 1,updatedCells.length - 1 )];
             // setting colors
-            setPivots([...array1IndexesList]);
-            setCellYellowMarker([...array2IndexesList]);
-            setTransparency([...range(0,array1IndexesList[0] - 1,false),
+            setCellGreenMarker([...array1IndexesList]);
+            setCellPurpleMarker([...array2IndexesList]);
+            setCellTransparentMarker([...range(0,array1IndexesList[0] - 1,false),
                                     ...range(array2IndexesList[array2IndexesList.length - 1] + 1,
                                         updatedCells.length - 1 ,false)]);
             await delay(1000)
@@ -550,7 +551,7 @@ function Array(props) {
 
             // Swap the elements at indices i and j
             [updatedCells[i], updatedCells[j]] = [updatedCells[j], updatedCells[i]];
-            setIsBlink([i,j])
+            setCellBlinkRedMarker([i,j])
 
             // Update the state after the swap
             setCells([...updatedCells]);
@@ -559,7 +560,7 @@ function Array(props) {
             if (i === 1) {
                 await delay(500)
                 setPointer([]); // Clear the pointer after the last swap
-                setIsBlink([]);
+                setCellBlinkRedMarker([]);
             }
             await delay(750)
         } // Delay for each swap
@@ -607,12 +608,12 @@ function Array(props) {
                     removeCell={() => removeCell(index)} // Correctly call removeCell with index
                     switchCell={() => handleCellSwitchState(index)} // Correctly call switchCell
                     isSelected={isCellSelected === index} // Pass selection state
-                    isYellowMarker={cellYellowMarker.includes(index)}
+                    isYellowMarker={cellPurpleMarker.includes(index)}
                     isPointer={isPointer.includes(index)}
-                    isBlink={isBlink.includes(index)}
-                    isMarked = {marker.includes(index)}
-                    isPivot = {pivots.includes(index)}
-                    isTransparent={transparency.includes(index)}
+                    isBlink={cellBlinkRedMarker.includes(index)}
+                    isMarked = {cellGreyMarker.includes(index)}
+                    isPivot = {cellGreenMarker.includes(index)}
+                    isTransparent={cellTransparentMarker.includes(index)}
                     isDisabled = {isCellDisabled}
                 />
             ))}
@@ -624,6 +625,7 @@ function Array(props) {
                         key={index}
                         value={cell}
                         isBlink={isBlinkMerge.includes(index)}
+                        isDisabled={isCellDisabled}
                     >
                     </Cell>
                 ))
