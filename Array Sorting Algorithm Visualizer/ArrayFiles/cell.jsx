@@ -6,11 +6,11 @@ function Cell({
                   removeCell,
                   switchCell,
                   isSelected,
-                  isYellowMarker,
                   isPointer,
                   isBlink,
-                  isMarked,
-                  isPivot,
+                  cellPurpleMarker,
+                  cellGreyMarker,
+                  cellGreenMarker,
                   isTransparent,
                   isDisabled,
                   onClick
@@ -19,9 +19,9 @@ function Cell({
     let buttonStatus
     if (isSelected){buttonStatus = 'cellValueSelected'}
     else if (isBlink){buttonStatus = 'cellValueBlink'}
-    else if (isYellowMarker){buttonStatus = 'cellValueYellow'}
-    else if (isMarked){buttonStatus = 'cellValueMarked'}
-    else if (isPivot){buttonStatus = 'cellValuePivot'}
+    else if (cellPurpleMarker){buttonStatus = 'cellValueYellow'}
+    else if (cellGreyMarker){buttonStatus = 'cellValueMarked'}
+    else if (cellGreenMarker){buttonStatus = 'cellValuePivot'}
     else buttonStatus = 'cellValueDefault'
 
     return (
