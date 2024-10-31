@@ -9,7 +9,6 @@ class Player{
         this.cur_bet = betting_amount;
     }
 
-
     double_bet(){
         if (this.balance - this.cur_bet < 0){
             throw Error('cant bet less than 0')
@@ -485,12 +484,12 @@ document.addEventListener('DOMContentLoaded', () => {
         //image reset
         let img
         //player
-        for (let i=1; i < current_player_image_index; i++) {
+        for (let i=1; i <= current_player_image_index; i++) {
             img = document.getElementById('p-card' + i);
             img.src = '';
         }
         //dealer
-        for (let j=1;j < current_dealer_image_index; j++){
+        for (let j=1;j <= current_dealer_image_index; j++){
             img = document.getElementById('d-card' + j);
             img.src = '';
         }
