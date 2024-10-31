@@ -494,6 +494,8 @@ document.addEventListener('DOMContentLoaded', () => {
             img = document.getElementById('d-card' + j);
             img.src = '';
         }
+          current_player_image_index = 3; // index for adding the images to the display
+          current_dealer_image_index = 3;
 
     }
 
