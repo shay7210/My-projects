@@ -141,6 +141,8 @@ function Array(props) {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     // bubble sort
     async function bubbleSort() {
+           // prevents cases the array is empty
+        if (cells.length === 0){return;}
         const updatedCells = cells.map(value => parseInt(value, 10));
         disableButtons()
         for (let i = 0; i < updatedCells.length - 1; i++) {
@@ -174,6 +176,8 @@ function Array(props) {
     }
     //insertion sort
     async function insertionSort() {
+           // prevents cases the array is empty
+        if (cells.length === 0){return;}
         // create copy of cells
         let updatedCells = cells.map(value => parseInt(value, 10));
         disableButtons();
@@ -211,6 +215,8 @@ function Array(props) {
     }
     //quick sort
     async function quickSort() {
+           // prevents cases the array is empty
+        if (cells.length === 0){return;}
         // create a copy of cells cast string to int
         let updatedCells = cells.map(value => parseInt(value, 10));
         // mark the first pivot
@@ -344,6 +350,8 @@ function Array(props) {
     }
     //merge sort
     async function mergeSort() {
+           // prevents cases the array is empty
+        if (cells.length === 0){return;}
         const updatedCells = [...cells.map(value => parseInt(value, 10))];
         const  testCells = [0,1,2,3,4,5,6,7,8,9]
         const callStack = [[0, updatedCells.length - 1]];
@@ -538,6 +546,8 @@ function Array(props) {
 
     // fisher yates shuffle
    async function shuffleArray() {
+          // prevents cases the array is empty
+        if (cells.length === 0){return;}
         // Create a copy of the cells array to avoid mutating state directly
         const updatedCells = [...cells];
         disableButtons()
