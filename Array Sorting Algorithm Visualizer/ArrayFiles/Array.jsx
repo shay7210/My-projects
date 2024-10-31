@@ -15,7 +15,6 @@ function Array(props) {
     const [cellRedMarker, setCellRedMarker] = useState(null); // if the cell is about to switch
     const [cellBlinkRedMarker, setCellBlinkRedMarker] = useState([]); // state for the blink of the two cells after the switch
     const [cellTransparentMarker, setCellTransparentMarker] = useState([]);
-
     //merge use states
     const [mergeArray, setMergeArray] = useState([]);
     const [isMerge, setIsMerge] = useState(false);
@@ -608,11 +607,11 @@ function Array(props) {
                     removeCell={() => removeCell(index)} // Correctly call removeCell with index
                     switchCell={() => handleCellSwitchState(index)} // Correctly call switchCell
                     isSelected={isCellSelected === index} // Pass selection state
-                    isYellowMarker={cellPurpleMarker.includes(index)}
                     isPointer={isPointer.includes(index)}
                     isBlink={cellBlinkRedMarker.includes(index)}
-                    isMarked = {cellGreyMarker.includes(index)}
-                    isPivot = {cellGreenMarker.includes(index)}
+                    cellPurpleMarker={cellPurpleMarker.includes(index)}
+                    cellGreyMarker = {cellGreyMarker.includes(index)}
+                    cellGreenMarker = {cellGreenMarker.includes(index)}
                     isTransparent={cellTransparentMarker.includes(index)}
                     isDisabled = {isCellDisabled}
                 />
