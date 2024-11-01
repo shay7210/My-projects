@@ -54,7 +54,7 @@ class ScoreToken{
             // case when second or above aces are drawn
             else if (this.user_hand[i].rank === 'ace'){
                 this.score[0] += 1;
-                this.score[1] += 11;
+                this.score[1] += 1;
             }
             // normal case no aces
            else if (this.score.length === 1) { // adds the score in case of one
