@@ -14,7 +14,7 @@ with open(file_path, mode='r') as file:
         cone_dots.append(cone_point)
     #path function creation
     path_line = []
-    #Collects the dots for the outer and inner lines
+    #creates a path using the points from the right and the left
     for i in range(156):
         # Average the points (coneDots[i] and coneDots[i + 156]) to create a path
         mid_x = (cone_dots[i][0] + cone_dots[i + 156][0]) / 2
