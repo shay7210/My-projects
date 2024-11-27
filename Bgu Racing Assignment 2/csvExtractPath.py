@@ -8,7 +8,7 @@ cone_dots = []
 with open(file_path, mode='r') as file:
     reader = csv.reader(file)
     for row in reader:
-        #collect the cone positions , ignore the first two lines, fix the location to fit the screen better
+        #collect the cone positions , ignore the first two lines, fix and scale the points to fit the screen better
         if row[0] == 'x' or row[0] == '':continue
         cone_point = (float(row[0]) * 0.7 + 500, float(row[1]) * 0.7 + 700)
         cone_dots.append(cone_point)
