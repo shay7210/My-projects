@@ -5,3 +5,4 @@ As the kart moves along the track, the program dynamically calculates and displa
 ensuring the kart's orientation is correct. It also displays the kart's position (x, y) and the angle (θ).
 Using this program requires installation of pygame library,
 type 'pip install pygame' in the terminal to install the package
+To initilize the program run trackCreator.py file
