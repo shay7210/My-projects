@@ -1,6 +1,6 @@
 import math
 import pygame
-from csvDataExtractor.csvExtractPath import cone_dots, path_line
+from csvExtractPath import cone_dots, path_line
 
 #upload title, kart and cone images
 car_image = pygame.image.load("images/kart.png")
