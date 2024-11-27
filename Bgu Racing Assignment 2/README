@@ -1,0 +1,7 @@
+This program takes in a CSV file containing a list of points that represent the positions of cones.
+The program processes these points to create a visual representation of the track using Pygame,
+displays the cones on the screen, and creates a path for the kart to follow.
+As the kart moves along the track, the program dynamically calculates and displays the angle of the kart, 
+ensuring the kart's orientation is correct. It also displays the kart's position (x, y) and the angle (θ).
+Using this program requires installation of pygame library,
+type 'pip install pygame' in the terminal to install the package
