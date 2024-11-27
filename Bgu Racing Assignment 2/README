@@ -1,9 +1,24 @@
 This program takes in a CSV file containing a list of points that represent the positions of cones.
 The program processes these points to create a visual representation of the track using Pygame,
 displays the cones on the screen, and creates a path for the kart to follow.
-As the kart moves along the track, the program dynamically calculates and displays the angle of the kart, 
+As the kart moves along the track, the program dynamically calculates and the correct angle of the kart, 
 ensuring the kart's orientation is correct. It also displays the kart's position (x, y) and the angle (θ).
+
+#how to use
 Using this program requires installation of pygame library,
 type 'pip install pygame' in the terminal to install the package
 To initilize the program run trackCreator.py file
 My OS is windows 10
+
+#why i want to join
+I am highly enthusiastic about programming and constantly seek opportunities to challenge myself and grow. At times, 
+I feel that my current degree doesn't push me to the limits of my potential, and I crave additional challenges to further develop my skills. 
+I am passionate about using my programming expertise in practical applications, 
+and I am eager to apply the knowledge Ihave gained in a real-world project.
+
+I feel like Bgu Racing aligns perfectly with my goals and ambitions, 
+as it offers a hands-on opportunity to work on cutting-edge technology in the field of autonomous systems.
+I am also curious to work as part of a team with other engineering fields, where I can learn from their expertise while contributing my own skills. 
+Joining the autonomous department would allow me to collaborate with like-minded individuals,
+push myself to new limits, and contribute to an exciting and innovative project.
+
