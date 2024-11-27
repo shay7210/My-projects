@@ -8,7 +8,7 @@ cone_image = pygame.image.load("images/cone.png")
 title_image = pygame.image.load("images/Title.png")
 #set the size of the title, kart and the cone
 car_image = pygame.transform.scale(car_image, (38,38))
-cone_image = pygame.transform.scale(cone_image, (10, 10))
+cone_image = pygame.transform.scale(cone_image, (5, 5))
 title_image = pygame.transform.scale(title_image, (300,100))
 #inisilize pygame
 pygame.init()
